@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: platforms-depl
+  name: commands-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: platformservice-pod
+      app: commandservice
   template:
     metadata:
       labels:
-        app: platformservice-pod
+        app: commandservice
     spec:
       containers:
-        - name: platformservice-container
-          image: korayongun/platformservice:latest
+        - name: commandservice
+          image: korayongun/commandservice:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: platformd-clusterip-srv
+  name: commands-clusterip-srv
 spec:
   type: ClusterIP
   selector:
-    app: platformservice-pod
+    app: commandservice
   ports:
-  - name: platformservice-pod
+  - name: commandservice
     protocol: TCP
     port: 80
     targetPort: 80
