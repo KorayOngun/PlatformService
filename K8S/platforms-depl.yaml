@@ -6,26 +6,26 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: platformservice-pod
+      app: platformservice
   template:
     metadata:
       labels:
-        app: platformservice-pod
+        app: platformservice
     spec:
       containers:
-        - name: platformservice-container
+        - name: platformservice
           image: korayongun/platformservice:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: platformd-clusterip-srv
+  name: platforms-clusterip-srv
 spec:
   type: ClusterIP
   selector:
-    app: platformservice-pod
+    app: platformservice
   ports:
-  - name: platformservice-pod
+  - name: platformservice
     protocol: TCP
     port: 80
     targetPort: 80
