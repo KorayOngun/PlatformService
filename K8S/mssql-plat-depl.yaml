@@ -22,17 +22,22 @@ spec:
             value: "Express"
           - name: ACCEPT_EULA
             value: "Y"
-          - name: SA_PASSWORD
+          - name: MSSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: mssql-credentials
+                key: MSSQL_SA_USERNAME
+          - name: MSSQL_SA_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mssql
-                key: SA_PASSWORD
+                key: MSSQL_SA_PASSWORD
           volumeMounts:
-            - mountPath: /var/opt/mssql/data
-              name: mssqldb
+          - mountPath: /var/opt/mssql/data
+            name: mssqldb
       volumes:
       - name: mssqldb
-        persistentVolumeClaim: 
+        persistentVolumeClaim:
           claimName: mssql-claim
 ---
 apiVersion: v1
@@ -61,4 +66,3 @@ spec:
   - protocol: TCP
     port: 1433
     targetPort: 1433
-

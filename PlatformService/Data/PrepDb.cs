@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using PlatformService.Models;
 
 namespace PlatformService.Data;
@@ -7,16 +9,33 @@ namespace PlatformService.Data;
 
 public static class PrepDb
 {
-    public static void PrepPopulation(this IApplicationBuilder app)
+    public static void PrepPopulation(this IApplicationBuilder app, bool IsProduction)
     {
+
         using (var serviceScope = app.ApplicationServices.CreateScope())
         {
-            SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>());
+            SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(), IsProduction);
 
         }
     }
-    private static void SeedData(AppDbContext context)
+    private static void SeedData(AppDbContext context, bool IsProduction)
     {
+        if (IsProduction)
+        {
+            try
+            {
+                Console.Write("--> db creating...  ");
+                context.Database.EnsureCreated();
+            }
+            catch (System.Exception e)
+            {
+                Console.Write("error");
+                Console.Write(e.Message);
+                throw new Exception(message: "db olusturulamadı");
+            }
+            Console.Write("success");
+
+        }
         if (!context.Platforms.Any())
         {
             Console.WriteLine("--> Seeding Data...");

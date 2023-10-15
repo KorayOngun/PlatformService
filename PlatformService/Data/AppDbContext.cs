@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using PlatformService.Models;
 
 namespace PlatformService.Data;
@@ -7,7 +9,10 @@ public class AppDbContext : DbContext
 {
     public DbSet<Platform> Platforms { get; set; }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+       
+    }
 
 
 

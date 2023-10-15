@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
+
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
 builder.Services.AddControllers();
@@ -13,7 +15,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+    {
+        Console.WriteLine("--> using sql server");
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConn"));
+    });
+}
+else
+{
+    Console.WriteLine("--> using in mem.");
+    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+}
+
+
 
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 
@@ -39,6 +55,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.PrepPopulation();
+
+
+app.PrepPopulation(app.Environment.IsProduction());
 
 app.Run();
