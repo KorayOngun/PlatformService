@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PlatformService.AsyncDataServices;
 using PlatformService.Data;
 using PlatformService.Dtos;
 using PlatformService.Models;
@@ -14,13 +15,13 @@ public class PlatformController : ControllerBase
     private readonly IPlatformRepo _repository;
     private readonly IMapper _mapper;
     private readonly ICommandDataClient _commandDataClient;
-
-
-    public PlatformController(IPlatformRepo repository, IMapper mapper, ICommandDataClient commandDataClient)
+    private readonly IMessageBusClient _messageBusClient;
+    public PlatformController(IPlatformRepo repository, IMapper mapper, ICommandDataClient commandDataClient, IMessageBusClient messageBusClient)
     {
         _repository = repository;
         _mapper = mapper;
         _commandDataClient = commandDataClient;
+        _messageBusClient = messageBusClient;
     }
 
     [HttpGet("[action]")]
@@ -50,6 +51,8 @@ public class PlatformController : ControllerBase
 
         var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
 
+
+        // Send Sync Message
         try
         {
             await _commandDataClient.SendPlatformToCommand(platformReadDto);
@@ -58,6 +61,21 @@ public class PlatformController : ControllerBase
         {
             Console.WriteLine($"--> Could not send synchronously {e.Message}");
         }
+
+        // Send Async Message
+        var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
+        platformPublishedDto.Event = "Platform_Published";
+        _messageBusClient.PublishNewPlatform(platformPublishedDto);
+        // try
+        // {
+        //     var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
+        //     platformPublishedDto.Event = "Platform_Published";
+        //     _messageBusClient.PublishNewPlatform(platformPublishedDto);
+        // }
+        // catch (Exception e)
+        // {
+        //     Console.WriteLine($"--> Could not send Asynchronously {e.Message}");
+        // }
 
         return CreatedAtAction(actionName: nameof(GetById), routeValues: new { Id = platformReadDto.Id }, value: platformReadDto);
     }
