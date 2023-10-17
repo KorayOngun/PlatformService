@@ -63,19 +63,16 @@ public class PlatformController : ControllerBase
         }
 
         // Send Async Message
-        var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
-        platformPublishedDto.Event = "Platform_Published";
-        _messageBusClient.PublishNewPlatform(platformPublishedDto);
-        // try
-        // {
-        //     var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
-        //     platformPublishedDto.Event = "Platform_Published";
-        //     _messageBusClient.PublishNewPlatform(platformPublishedDto);
-        // }
-        // catch (Exception e)
-        // {
-        //     Console.WriteLine($"--> Could not send Asynchronously {e.Message}");
-        // }
+        try
+        {
+            var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
+            platformPublishedDto.Event = "Platform_Published";
+            _messageBusClient.PublishNewPlatform(platformPublishedDto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"--> Could not send Asynchronously {e.Message}");
+        }
 
         return CreatedAtAction(actionName: nameof(GetById), routeValues: new { Id = platformReadDto.Id }, value: platformReadDto);
     }

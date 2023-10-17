@@ -77,3 +77,4 @@ C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\o
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\obj\Debug\net7.0\CommandsService.pdb
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\obj\Debug\net7.0\CommandsService.genruntimeconfig.cache
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\obj\Debug\net7.0\ref\CommandsService.dll
+C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\RabbitMQ.Client.dll
