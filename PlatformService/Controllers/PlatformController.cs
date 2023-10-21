@@ -53,14 +53,14 @@ public class PlatformController : ControllerBase
 
 
         // Send Sync Message
-        try
-        {
-            await _commandDataClient.SendPlatformToCommand(platformReadDto);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"--> Could not send synchronously {e.Message}");
-        }
+        // try
+        // {
+        //     await _commandDataClient.SendPlatformToCommand(platformReadDto);
+        // }
+        // catch (Exception e)
+        // {
+        //     Console.WriteLine($"--> Could not send synchronously {e.Message}");
+        // }
 
         // Send Async Message
         try

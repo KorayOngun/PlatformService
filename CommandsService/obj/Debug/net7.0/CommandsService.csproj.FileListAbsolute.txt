@@ -1,5 +1,4 @@
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\appsettings.Development.json
-C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\appsettings.json
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\CommandsService.exe
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\CommandsService.deps.json
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\CommandsService.runtimeconfig.json
@@ -78,3 +77,8 @@ C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\o
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\obj\Debug\net7.0\CommandsService.genruntimeconfig.cache
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\obj\Debug\net7.0\ref\CommandsService.dll
 C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\RabbitMQ.Client.dll
+C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\Google.Protobuf.dll
+C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\Grpc.Core.Api.dll
+C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\Grpc.Net.Client.dll
+C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\Grpc.Net.Common.dll
+C:\Users\koray\Desktop\.netMicroservices -Full course\Solution\CommandsService\bin\Debug\net7.0\appsettings.Production.json
